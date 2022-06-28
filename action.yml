@@ -1,0 +1,34 @@
+name: 'WIP Blocker'
+description: 'Blocks PRs that are marked as WIP'
+inputs:
+  keywords:
+    description: |
+      List of space-separated words to block in the PR title and labels. 
+      Case insensitive. Default: "wip rfc poc draft"
+    required: false
+    default: 'wip rfc poc draft'
+runs:
+  using: "composite"
+  steps:
+    - name: Check PR labels
+      shell: bash
+      run: |
+        contains() {
+          [[ $1 =~ (^|[[:space:]])$2($|[[:space:]]) ]] && return 0 || return 1
+        }
+
+        keywords=$(echo "${{ inputs.keywords }}" | tr '[:upper:]' '[:lower:]')
+        pr_title=$(echo "${{ github.event.pull_request.title }}" | tr '[:upper:]' '[:lower:]')
+        pr_labels=$(echo "${{ toJson(github.event.pull_request.labels.*.name) }}" | tr '[:upper:]' '[:lower:]')
+
+        for token in $(echo ${keywords}); do
+            if contains "${pr_title}" "${token}"; then
+                echo "PR is marked as work in progress: title contains '${token}'."
+                exit 1
+            fi
+
+            if contains "${pr_labels}" "${token}"; then
+                echo "PR is marked as work in progress: includes label '${token}'."
+                exit 1
+            fi
+        done
