@@ -1,5 +1,5 @@
-name: 'The Simplest WIP Blocker'
-description: 'Blocks PRs that are marked as WIP'
+name: 'The Simplest WIP Blocker Ever'
+description: 'Blocks PRs that are marked as WIP.'
 inputs:
   keywords:
     description: |
