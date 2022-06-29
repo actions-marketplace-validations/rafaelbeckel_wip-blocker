@@ -1,5 +1,8 @@
 name: 'The Simplest WIP Blocker Ever'
 description: 'Blocks PRs that are marked as WIP.'
+branding:
+  icon: 'lock'  
+  color: 'orange'
 inputs:
   keywords:
     description: |
