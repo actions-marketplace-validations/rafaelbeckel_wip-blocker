@@ -1,4 +1,4 @@
-# wip-blocker
+# The simplest WIP blocker ever
 Simple Github Action to block PRs with WIP status.
 
 It works by comparing a list of keywords with your PR title and labels, and fails if there's a match (case-insensitive). 
