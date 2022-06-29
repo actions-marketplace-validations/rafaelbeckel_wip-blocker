@@ -1,4 +1,4 @@
-name: 'WIP Blocker'
+name: 'Simplest bash-only WIP Blocker'
 description: 'Blocks PRs that are marked as WIP'
 inputs:
   keywords:
